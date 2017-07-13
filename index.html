@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>IVY ENVY CONTENT PICKER OF AWESOMENESS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div class="container" id="js-app">
+        <h2 style="text-align: center; margin: 20px 0;">🍗🍗🍗 IVY ENVY WEIGHTED CHICKEN DINNER PICKER 🍗🍗🍗</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Number of Entries</th>
+                    <th>Chance of Winning</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody v-for="(person, index) in people">
+                <tr>
+                    <th scope="row">{{ person.name }}</th>
+                    <th>{{ person.entries }}</th>
+                    <th>{{ calculateChance(person) }}</th>
+                    <th><button type="button" class="btn btn-danger" @click="removePerson(index)">X</button></th>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <div class="card">
+            <div class="card-block">
+                <form v-on:submit.prevent>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="name" placeholder="Enter Name" v-model="nameInput">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="weight" placeholder="Number of Entries" v-model="entriesInput">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <button type="submit" class="btn btn-primary" id="add" v-on:click="addPerson">Add 'em</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 50px;">
+            <div class="card-block">
+                <button type="submit" class="btn btn-success" id="winner" v-on:click="pickWinner">Pick A Winner!</button>
+            </div>
+            <div v-if="winner" class="alert alert-success hidden" role="alert">
+                <strong>Winner Winner Chicken Dinner is:</strong> <span>{{ winner }}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="picker.js"></script>
+</body>
+</html>
